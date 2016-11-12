@@ -1,69 +1,125 @@
 import math
 
 
-def sigmoid_activation(z):
-    z = max(-60.0, min(60.0, z))
+def sigmoid_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    z = max(-60.0, min(60.0, s))
     return 1.0 / (1.0 + math.exp(-z))
 
 
-def tanh_activation(z):
-    z = max(-60.0, min(60.0, z))
+def tanh_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    z = max(-60.0, min(60.0, s))
     return math.tanh(z)
 
 
-def sin_activation(z):
-    z = max(-60.0, min(60.0, z))
+def sin_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    z = max(-60.0, min(60.0, s))
     return math.sin(z)
 
 
-def gauss_activation(z):
-    z = max(-60.0, min(60.0, z))
+def gauss_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    z = max(-60.0, min(60.0, s))
     return math.exp(-0.5 * z**2) / math.sqrt(2 * math.pi)
 
 
-def relu_activation(z):
-    return z if z > 0.0 else 0
+def relu_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    return s if s > 0.0 else 0
 
 
-def identity_activation(z):
-    return z
+def identity_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    return s
 
 
-def clamped_activation(z):
-    return max(-1.0, min(1.0, z))
+def clamped_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    return max(-1.0, min(1.0, s))
 
 
-def inv_activation(z):
-    if z == 0:
+def inv_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    if s == 0:
         return 0.0
 
-    return 1.0 / z
+    return 1.0 / s
 
 
-def log_activation(z):
-    z = max(1e-7, z)
+def log_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    z = max(1e-7, s)
     return math.log(z)
 
 
-def exp_activation(z):
-    z = max(-60.0, min(60.0, z))
+def exp_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+    
+    z = max(-60.0, min(60.0, s))
     return math.exp(z)
 
 
-def abs_activation(z):
-    return abs(z)
+def abs_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    return abs(s)
 
 
-def hat_activation(z):
-    return max(0.0, 1 - abs(z))
+def hat_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    return max(0.0, 1 - abs(s))
 
 
-def square_activation(z):
-    return z ** 2
+def square_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    return s ** 2
 
 
-def cube_activation(z):
-    return z ** 3
+def cube_activation(bias, links, ivalues):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    return s ** 3
 
 
 class InvalidActivationFunction(Exception):

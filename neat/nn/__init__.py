@@ -48,10 +48,10 @@ class FeedForwardNetwork(object):
             self.values[i] = v
 
         for node, func, bias, response, links in self.node_evals:
-            s = 0.0
-            for i, w in links:
-                s += self.values[i] * w
-            self.values[node] = func(bias + response * s)
+            #s = 0.0
+            #for i, w in links:
+            #    s += self.values[i] * w
+            self.values[node] = func(bias, links, self.values)
 
         return [self.values[i] for i in self.output_nodes]
 
@@ -107,10 +107,10 @@ class RecurrentNetwork(object):
             ovalues[i] = v
 
         for node, func, bias, response, links in self.node_evals:
-            s = 0.0
-            for i, w in links:
-                s += ivalues[i] * w
-            ovalues[node] = func(bias + response * s)
+            #s = 0.0
+            #for i, w in links:
+            #    s += ivalues[i] * w
+            ovalues[node] = func(bias, links, ivalues)
 
         return [ovalues[i] for i in self.output_nodes]
 
