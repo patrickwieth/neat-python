@@ -122,6 +122,22 @@ def cube_activation(bias, links, ivalues):
     return s ** 3
 
 
+def maxout_activation(bias, links, ivalues):
+    inputs = []
+    for i, w in links:
+        inputs.append(ivalues[i] * w) 
+
+    return max(inputs)    
+
+
+def elu(x):
+    s = 0.0
+    for i, w in links:
+        s += ivalues[i] * w
+
+    return s if s > 0 else math.exp(x) - 1
+
+
 class InvalidActivationFunction(Exception):
     pass
 
